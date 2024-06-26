@@ -1,0 +1,18 @@
+extends Control
+
+
+@onready var sound = $Sound
+
+
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_exit_button_pressed():
+	SoundManager.play_button_click(sound)
+	SignalManager.on_game_exit_pressed.emit()
