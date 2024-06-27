@@ -3,30 +3,10 @@
 [ext_resource type="Script" path="res://game_screen/game_screen.gd" id="1_bwcw3"]
 [ext_resource type="LabelSettings" uid="uid://dome2gjk366q4" path="res://assets/gm_32_dark_dark.tres" id="1_llerc"]
 [ext_resource type="Texture2D" uid="uid://3m8udkri7ess" path="res://assets/ui/blue_button00.png" id="2_ia1ci"]
+[ext_resource type="PackedScene" uid="uid://bx8h6f6h7cgr8" path="res://memory_tile/memory_tile.tscn" id="2_p1hvy"]
 [ext_resource type="Texture2D" uid="uid://dqi6emld8tkej" path="res://assets/ui/yellow_button00.png" id="3_cp145"]
 [ext_resource type="Texture2D" uid="uid://cyc1megjr4tl0" path="res://assets/ui/green_button00.png" id="4_uovj2"]
 [ext_resource type="LabelSettings" uid="uid://v3cjgtoq45xo" path="res://assets/gm_32_white.tres" id="5_paldy"]
-
-[sub_resource type="GDScript" id="GDScript_xxiss"]
-script/source = "extends MarginContainer
-
-
-@onready var sound = $\"../../Sound\"
-
-
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
-func _on_exit_button_pressed():
-	SoundManager.play_button_click(sound)
-	SignalManager.on_game_exit_pressed.emit()
-"
 
 [node name="GameScreen" type="Control"]
 layout_mode = 3
@@ -36,6 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_bwcw3")
+memory_tile_scene = ExtResource("2_p1hvy")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 1
@@ -48,9 +29,8 @@ grow_vertical = 2
 [node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-script = SubResource("GDScript_xxiss")
 
-[node name="GridContainer" type="GridContainer" parent="HBoxContainer/MarginContainer"]
+[node name="TileContainer" type="GridContainer" parent="HBoxContainer/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -128,4 +108,4 @@ vertical_alignment = 1
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 
-[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/ExitButton" to="HBoxContainer/MarginContainer" method="_on_exit_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MarginContainer2/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

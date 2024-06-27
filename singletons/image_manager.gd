@@ -1,8 +1,16 @@
 extends Node
 
 
+const FRAME_IMAGES: Array = [
+	preload("res://assets/frames/blue_frame.png"),
+	preload("res://assets/frames/red_frame.png"),
+	preload("res://assets/frames/yellow_frame.png"),
+	preload("res://assets/frames/green_frame.png")
+]
+
+
 # Dictionary array
-var item_images: Array = []
+var _item_images: Array = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -18,7 +26,7 @@ func add_file_to_list(fn: String, path: String) -> void:
 		"item_texture": load(full_path)
 	}
 	
-	item_images.append(image_info)
+	_item_images.append(image_info)
 
 
 func load_item_images() -> void:
@@ -35,9 +43,20 @@ func load_item_images() -> void:
 		if ".import" not in fn:
 			add_file_to_list(fn, path)
 			
-	print("loaded:", item_images.size())
+	print("loaded:", _item_images.size())
 
 
 func get_random_item_image() -> Dictionary:
-	return item_images.pick_random()
-	
+	return _item_images.pick_random()
+
+
+func get_image(index: int) -> Dictionary:
+	return _item_images[index]
+
+
+func get_random_frame_image() -> CompressedTexture2D:
+	return FRAME_IMAGES.pick_random()
+
+
+func shuffle_images() -> void:
+	_item_images.shuffle()

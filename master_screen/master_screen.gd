@@ -12,9 +12,9 @@ func _ready():
 	SignalManager.on_level_selected.connect(on_level_selected)
 
 
-func show_game(show: bool) -> void:
-	game_screen.visible = show
-	main_screen.visible = !show
+func show_game(is_show: bool) -> void:
+	game_screen.visible = is_show
+	main_screen.visible = !is_show
 
 func on_game_exit_pressed() -> void:
 	show_game(false)
