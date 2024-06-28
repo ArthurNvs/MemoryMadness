@@ -1,8 +1,6 @@
 extends Control
 
-
 @export var memory_tile_scene: PackedScene
-
 
 @onready var sound = $Sound
 @onready var tile_container = $HBoxContainer/MarginContainer/TileContainer

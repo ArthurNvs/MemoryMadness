@@ -1,13 +1,11 @@
 extends Node
 
-
 const SOUND_MAIN_MENU = "main"
 const SOUND_IN_GAME = "ingame"
 const SOUND_SUCCESS = "success"
 const SOUND_GAME_OVER = "gameover"
 const SOUND_SELECT_TILE = "tile"
 const SOUND_SELECT_BUTTON = "button"
-
 
 const SOUNDS = {
 	SOUND_MAIN_MENU: preload("res://assets/sounds/bgm_action_3.mp3"),

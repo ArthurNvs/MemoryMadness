@@ -2,24 +2,21 @@ extends TextureButton
 
 class_name MemoryTile
 
-
 @onready var frame_image = $FrameImage
 @onready var item_image = $ItemImage
-
 
 var _item_name: String
 var _can_select_me: bool = true
 
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	SignalManager.on_selection_disabled.connect(on_selection_disabled)
 	SignalManager.on_selection_enabled.connect(on_selection_enabled)
 
 
-func reveal(r: bool) -> void:
-	frame_image.visible = r
-	item_image.visible = r
+func reveal(rvl: bool) -> void:
+	frame_image.visible = rvl
+	item_image.visible = rvl
 
 
 func get_item_name() -> String:
@@ -31,6 +28,18 @@ func setup(image_info: Dictionary, frame_img: CompressedTexture2D) -> void:
 	item_image.texture = image_info.item_texture
 	_item_name = image_info.item_name
 	reveal(false)
+
+
+func disable_on_success() -> void:
+	z_index = 1
+	var tween = get_tree().create_tween()
+	tween.set_parallel(true)
+	tween.tween_property(self, "disabled", true, 0)
+	tween.tween_property(self, "rotation", deg_to_rad(720), 0.5)
+	tween.tween_property(self, "scale", Vector2(1.5, 1.5), 0.5)
+	tween.set_parallel(false)
+	tween.tween_interval(0.6)
+	tween.tween_property(self, "scale", Vector2(0, 0), 0)
 
 
 func on_selection_disabled() -> void:
