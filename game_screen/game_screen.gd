@@ -4,12 +4,18 @@ extends Control
 
 @onready var sound = $Sound
 @onready var tile_container = $HBoxContainer/MarginContainer/TileContainer
-@onready var scorer = $Scorer
+@onready var scorer: Scorer = $Scorer
+@onready var moves_label = $HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer/MovesLabel
+@onready var pairs_label = $HBoxContainer/MarginContainer2/VBoxContainer/HBoxContainer2/PairsLabel
 
 
 func _ready():
 	SignalManager.on_level_selected.connect(on_level_selected)
 
+
+func _process(delta):
+	moves_label.text = scorer.get_moves_made_str()
+	pairs_label.text = scorer.get_pairs_made_str()
 
 func on_level_selected(level_num: int) -> void:
 	var level_data = GameManager.get_level_data(level_num)
