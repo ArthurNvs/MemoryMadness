@@ -6,15 +6,11 @@ extends Control
 
 @onready var sound = $Sound
 @onready var tile_container = $HBoxContainer/MarginContainer/TileContainer
+@onready var scorer = $Scorer
 
 
 func _ready():
 	SignalManager.on_level_selected.connect(on_level_selected)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 
 func on_level_selected(level_num: int) -> void:
@@ -25,6 +21,8 @@ func on_level_selected(level_num: int) -> void:
 	
 	for image_info in level_data.image_list:
 		add_memory_tile(image_info, frame_image)
+	
+	scorer.clear_new_game(level_data.target_pairs)
 
 
 func add_memory_tile(image_info: Dictionary, frame_image: CompressedTexture2D) -> void:
