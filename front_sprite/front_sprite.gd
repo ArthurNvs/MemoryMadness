@@ -24,6 +24,7 @@ func run_me() -> void:
 	tween.tween_property(self, "rotation", get_random_rotation(), get_random_spin_time())
 	tween.tween_property(self, "rotation", get_random_rotation(), get_random_spin_time())
 	tween.tween_property(self, "scale", SCALE_SMALL, SCALE_TIME)
+	tween.tween_callback(run_me)
 
 
 func get_random_spin_time() -> float:
